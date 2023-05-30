@@ -1,0 +1,46 @@
+datasource db {
+    provider = "mysql"
+    url = env("DATABASE_URL")
+}
+
+model Users {
+    id          Int         @id @default(autoincrement())
+    name        String      
+    email       String      @unique()
+    role        Roles        @default(user)
+    password    String
+    createdAt   DateTime    @default(now())
+}
+
+
+
+model Categories {
+    id          Int         @id @default(autoincrement())
+    name        String      @unique()
+    createdAt   DateTime    @default(now()) 
+    books       Books[]
+}
+
+model Books {
+    id          Int         @id @default(autoincrement())
+    name        String      @unique()
+    author      String 
+    description String
+    image       String
+    price       Int
+    status      Status?
+    category    Categories  @relation(fields: [categoryId], references: [id])
+    categoryId  Int
+    createdAt   DateTime    @default(now())
+}
+
+enum Status{
+    ComingSoon
+    Available
+}
+
+
+enum Roles{
+    user
+    admin
+}
