@@ -17,6 +17,7 @@ model Users {
 }
 
 model Categories {
+<<<<<<< HEAD
     id        Int      @id @default(autoincrement())
     name      String   @unique()
     createdAt DateTime @default(now())
@@ -26,15 +27,44 @@ model Categories {
 model Books {
     id          Int         @id @default(autoincrement())
     name        String      @unique()
+=======
+    id        Int               @id @default(autoincrement())
+    name      String            @unique()
+    books     BooksCategories[]
+    createdAt DateTime          @default(now())
+}
+
+model Books {
+    id          Int               @id @default(autoincrement())
+    name        String            @unique()
+>>>>>>> 88b995ec33f15b206fa0f0d54cf4c2148b6d9a9e
     author      String
     description String
     image       String
+    file        String
     status      Status?
+<<<<<<< HEAD
     category    Categories? @relation(fields: [categoryId], references: [id])
     categoryId  Int?
     createdAt   DateTime    @default(now())
 }
 
+=======
+    popularity  Int?
+    categories  BooksCategories[]
+    createdAt   DateTime          @default(now())
+}
+
+model BooksCategories {
+    books      Books      @relation(fields: [booksId], references: [id])
+    booksId    Int
+    category   Categories @relation(fields: [categoryId], references: [id])
+    categoryId Int
+
+    @@id([booksId, categoryId])
+}
+
+>>>>>>> 88b995ec33f15b206fa0f0d54cf4c2148b6d9a9e
 enum Status {
     ComingSoon
     Available
