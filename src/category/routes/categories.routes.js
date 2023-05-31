@@ -10,5 +10,5 @@ router.get('/show/:id', categoriesController.findOneCategories)
 router.patch('/update/:id', categoriesController.updateCategories)
 router.delete('/delete/:id', categoriesController.deleteCategories)
 router.get('/books/:id', categoriesController.findBooksCategory)
-
+    
 module.exports = router

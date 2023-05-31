@@ -189,6 +189,19 @@ class BookController {
             });
         }
     }
+
+    async getSomeBook(req, res){
+        try {
+            const books = await dbService.books.findMany()
+            const booksLimit = books.slice(0, 5)
+            res.json(booksLimit)
+        }catch(error){
+            res.status(500).json({
+                error: 'Terjadi kesalahan saat mengambil data buku',
+                status: 400
+                });
+        }
+    }
 }
 
 module.exports = BookController

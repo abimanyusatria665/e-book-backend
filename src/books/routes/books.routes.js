@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const bookController = new BookController();
 
-router.get('/show', bookController.getAllBooks);
+router.get('/show/more', bookController.getAllBooks);
 router.get('/show/:id', bookController.getOneBooks);
 router.post('/create', upload.fields([
     {name: 'image', maxCount: 1},
@@ -40,5 +40,5 @@ router.patch('/update/:id', upload.fields([
 router.delete('/delete/:id', bookController.deleteBook);
 router.get('/download/:id', bookController.downloadBook);
 router.get('/the-best-books', bookController.bestBooks)
-
+router.get('/show', bookController.getSomeBook)
 module.exports = router;
